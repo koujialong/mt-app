@@ -9,7 +9,7 @@
     <div class="detail" v-if="kind" @mouseenter="enterdetail" @mouseleave="livedetail">
       <template v-for="(item,idx) in curdetail.child" >
         <h4 :key="idx">{{item.title}}</h4>
-        <span v-for="v in item.child" :key="v">{{v}}</span>
+        <span v-for="v in item.child" :key="v" @click="goList(v)">{{v}}</span>
       </template>
     </div>
   </div>
@@ -44,6 +44,9 @@
       },
       livedetail:function () {
         this.kind=''
+      },
+      goList(v){
+        location.href=`/products?keyword=${encodeURIComponent(v)}`
       }
     }
   }
