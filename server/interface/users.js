@@ -45,7 +45,7 @@ router.post('/signup', async (ctx) => {
   if (user.length) {
     ctx.body = {
       code: -1,
-      msg: '已被注册'
+      msg: '已被注册pick4'
     }
     return
   }
