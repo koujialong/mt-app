@@ -30,7 +30,7 @@ router.post('/signup', async (ctx) => {
     } else {
       ctx.body = {
         code: -1,
-        msg: '请填写正确的验证码'
+        msg: '请填写正确的验证码pick2'
       }
     }
   } else {
