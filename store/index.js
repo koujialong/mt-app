@@ -15,6 +15,7 @@ const store = () => new Vuex.Store({
       {
         commit
       }, {req, app}) {
+      console.log(app.store.state.home.hotPlace)
       const {status, data: {province, city}} = await app.$axios.get('/geo/getPosition')
       commit('geo/setPosition', status === 200 ? {city, province} : {city: '', province: ''})
 
@@ -26,8 +27,27 @@ const store = () => new Vuex.Store({
       commit('home/setHotPlace', result)
       const {status:status3, data: {menu}} = await app.$axios.get('/geo/menu')
       commit('home/setMenu', status3 === 200 ? menu: [])
-    }
+    },
+    // async pageInit(
+    //   {
+    //     commit
+    //   }, app) {
+    //   console.log(app.$store.state.home.hotPlace)
+    //   const {status, data: {province, city}} = await app.$axios.get('/geo/getPosition')
+    //   commit('geo/setPosition', status === 200 ? {city, province} : {city: '', province: ''})
+    //
+    //   const {status:status2, data: {result}} = await app.$axios.get('/search/hotPlace',{
+    //     params:{
+    //       city:app.$store.state.geo.position.city.replace('市','')
+    //     }
+    //   })
+    //   commit('home/setHotPlace', result)
+    //   const {status:status3, data: {menu}} = await app.$axios.get('/geo/menu')
+    //   commit('home/setMenu', status3 === 200 ? menu: [])
+    //   console.log("调用")
+    // }
   }
+
 })
 
 export default store

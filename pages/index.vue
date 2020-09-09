@@ -25,6 +25,13 @@
       Emenu,
       life,
       artistic
+    },
+    mounted() {
+      console.log(this.$store)
+    },
+    created() {
+      // console.log("asdfasd")
+      // this.$store.dispatch('pageInit',this)
     }
   }
 </script>

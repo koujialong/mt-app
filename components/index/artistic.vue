@@ -91,7 +91,7 @@
       },
       async getList(keyword){
         let self=this
-        let {status, data: {count, pois}} = await self.$axios.get('/search/resultsByKeywords', {
+        let {status, data: {count, pois}} = await this.$axios.get('/search/resultsByKeywords', {
           params: {
             keyword,
             city: self.$store.state.geo.position.city

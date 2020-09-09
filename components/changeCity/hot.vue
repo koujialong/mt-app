@@ -4,7 +4,7 @@
       <dt>热门城市：</dt>
       <dd
         v-for="item in list"
-        :key="item.id">{{ item.name==='市辖区'?item.province:item.name }}</dd>
+        :key="item.id" @click="handleSelect(item)">{{ item.name==='市辖区'?item.province:item.name }}</dd>
     </dl>
   </div>
 </template>
@@ -21,6 +21,16 @@ export default {
     if(status===200){
       this.list=hots
     }
+  },
+  methods:{
+    handleSelect(item) {
+      let position={
+        city:item.name
+      }
+      this.$store.commit('geo/setPosition',position)
+      // location.href='/'
+      this.$router.push('/')
+    },
   }
 }
 </script>

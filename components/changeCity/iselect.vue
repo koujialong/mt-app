@@ -29,7 +29,6 @@
 
 <script>
   import _ from 'lodash'
-
   export default {
     name: "iselect",
     data() {
@@ -92,7 +91,8 @@
           city:item.value
         }
         this.$store.commit('geo/setPosition',position)
-        location.href='/'
+        // location.href='/'
+        this.$router.push('/')
       },
     }
   }

@@ -15,51 +15,63 @@
       <dt :id="'city-'+item.title">{{ item.title }}</dt>
       <dd>
         <span
+          class="sel"
           v-for="c in item.city"
-          :key="c">{{ c }}</span>
+          :key="c" @click="handleSelect(c)">{{ c }}</span>
       </dd>
     </dl>
   </div>
 </template>
 
 <script>
-import pyjs from 'js-pinyin'
-export default {
-  data(){
-    return {
-      list:'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
-      block:[]
-    }
-  },
-  async mounted(){
-    let self=this;
-    let blocks=[]
-    let {status,data:{city}}=await self.$axios.get('/geo/city');
-    if(status===200){
-      let p
-      let c
-      let d={}
-      city.forEach(item=>{
-        p=pyjs.getFullChars(item.name).toLocaleLowerCase().slice(0,1)
-        c=p.charCodeAt(0)
-        if(c>96&&c<123){
-          if(!d[p]){
-            d[p]=[]
-          }
-          d[p].push(item.name)
-        }
-      })
-      for(let [k,v] of Object.entries(d)){
-        blocks.push({
-          title:k.toUpperCase(),
-          city:v
-        })
+  import pyjs from 'js-pinyin'
+
+  export default {
+    data() {
+      return {
+        list: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
+        block: []
       }
-      blocks.sort((a,b)=>a.title.charCodeAt(0)-b.title.charCodeAt(0))
-      self.block=blocks
+    },
+    async mounted() {
+      let self = this;
+      let blocks = []
+      let {status, data: {city}} = await self.$axios.get('/geo/city');
+      if (status === 200) {
+        let p
+        let c
+        let d = {}
+        city.forEach(item => {
+          p = pyjs.getFullChars(item.name).toLocaleLowerCase().slice(0, 1)
+          c = p.charCodeAt(0)
+          if (c > 96 && c < 123) {
+            if (!d[p]) {
+              d[p] = []
+            }
+            d[p].push(item.name)
+          }
+        })
+        for (let [k, v] of Object.entries(d)) {
+          blocks.push({
+            title: k.toUpperCase(),
+            city: v
+          })
+        }
+        blocks.sort((a, b) => a.title.charCodeAt(0) - b.title.charCodeAt(0))
+        self.block = blocks
+      }
+    },
+    methods: {
+      handleSelect(item) {
+        let position = {
+          city: item
+        }
+        this.$store.commit('geo/setPosition', position)
+        // location.href='/'
+        this.$router.push('/')
+      },
     }
   }
-}
 </script>
 
 <style lang="scss">

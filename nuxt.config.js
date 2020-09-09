@@ -4,6 +4,9 @@ module.exports = {
   /*
   ** Headers of the page
   */
+  // router: {
+  //   mode: 'hash'
+  // },
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -31,7 +34,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    '@/plugins/axios'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -44,6 +48,7 @@ module.exports = {
   modules: [
     '@nuxtjs/axios'
   ],
+
   /*
   ** Build configuration
   */

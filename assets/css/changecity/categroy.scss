@@ -56,7 +56,11 @@
       margin: 10px 20px;
       color: #666;
       display: inline-block;
+      cursor: pointer;
       font-size: 14px;
+      &:hover {
+        color: #13D1BE;
+      }
     }
   }
 }
