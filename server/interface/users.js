@@ -23,14 +23,14 @@ router.post('/signup', async (ctx) => {
       if (new Date().getTime() - saveExpire > 0) {
         ctx.body = {
           code: -1,
-          msg: '验证码已过期，请重新尝试git12'
+          msg: '验证码已过期，请重新尝试git1'
         }
         return false
       }
     } else {
       ctx.body = {
         code: -1,
-        msg: '请填写正确的验证码pick2'
+        msg: '请填写正确的验证码'
       }
     }
   } else {
